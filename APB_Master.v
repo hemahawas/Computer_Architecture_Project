@@ -1,6 +1,6 @@
 module apb_master (
   input  PCLK,
-  input  PRESET_n, 	// Active low reset
+  input  PRESET_n,
  
   input  READ_WRITE,		// 2'b00 - NOP, 2'b01 - READ, 2'b11 - WRITE
   
@@ -61,10 +61,8 @@ module apb_master (
   assign PSEL_o = apb_state_setup | apb_state_access;
   assign PENABLE_o = apb_state_access;
   
-  // APB Address
   assign PADDR_o = {32{apb_state_access}} & PADDR_i;
   
-  // APB PWRITE control signal
   always @(posedge PCLK or negedge PRESET_n)
     if (~PRESET_n)
       PWRITE <= 1'b0;
