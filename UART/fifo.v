@@ -12,8 +12,8 @@ module fifo(
 
     assign empty = (fifo_count == 0);
     assign full = (fifo_count == 8);
-
-    always @( posedge clk) begin: write 
+// edit for PR
+    always @( posedge clk) begin: write
         if(wr && !full)
             fifo_ram[wr_ptr] <= data_in;
     end
